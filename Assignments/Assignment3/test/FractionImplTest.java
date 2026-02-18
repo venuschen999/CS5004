@@ -54,6 +54,7 @@ public class FractionImplTest {
     assertDoesNotThrow(() -> new FractionImpl(-1, 2));
     assertDoesNotThrow(() -> new FractionImpl(0, 5)); // valid; should normalize to 0/1
   }
+
   /**
    * The fraction should be stored in the simplest form.
    * 4/2 simplifies to 2/1.
@@ -160,6 +161,7 @@ public class FractionImplTest {
     assertDoesNotThrow(() -> f.setNumerator(0));
     assertEquals("0 / 1", f.toString());
   }
+
   /**
    * Setting a new valid denominator should update the value and re-normalize the fraction.
    */
@@ -172,6 +174,7 @@ public class FractionImplTest {
   }
 
   // *********************** toString tests ***********************
+
   /**
    * Verifies that toString() always prints the fraction in simplest terms.
    * 4/2 -> 2/1 and 6/15 -> 2/5.
@@ -347,6 +350,7 @@ public class FractionImplTest {
   }
 
   // *********************** compareTo tests ***********************
+
   /**
    * Fractions with equal numeric value should return 0
    * even if constructed differently (e.g., 1/2 vs 2/4).
