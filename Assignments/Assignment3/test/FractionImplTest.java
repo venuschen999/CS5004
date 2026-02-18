@@ -16,8 +16,6 @@ public class FractionImplTest {
 
   /**
    * Creates common Fraction instances before each test.
-   *
-   * <p>Using @BeforeEach creates new test objects for every test
    */
   @BeforeEach
   public void setUp() {
@@ -30,7 +28,7 @@ public class FractionImplTest {
   // ***********************Constructor tests***********************
 
   /**
-   * Denominator 0 is illegal because a fraction with denominator 0 is undefined.
+   * Denominator 0 is undefined.
    * The constructor should throw IllegalArgumentException.
    */
   @Test
@@ -39,7 +37,7 @@ public class FractionImplTest {
   }
 
   /**
-   * Denominators must be positive by class invariant (assignment requirement).
+   * Denominators must be positive
    * Passing a negative denominator should throw IllegalArgumentException.
    */
   @Test
@@ -57,7 +55,7 @@ public class FractionImplTest {
     assertDoesNotThrow(() -> new FractionImpl(0, 5)); // valid; should normalize to 0/1
   }
   /**
-   * The fraction should be stored in simplest form.
+   * The fraction should be stored in the simplest form.
    * 4/2 simplifies to 2/1.
    */
   @Test
@@ -91,7 +89,7 @@ public class FractionImplTest {
   // ***********************Getter / Setter tests***********************
 
   /**
-   * getter behavior should grab numerator and denominator.
+   * getter should grab numerator and denominator.
    */
   @Test
   public void testGetters() {
@@ -110,8 +108,7 @@ public class FractionImplTest {
 
   /**
    * Setting the numerator
-   *
-   * <p>This test ensures that the normalization will happen.
+   * the normalization will happen
    * especially for the important special case numerator == 0.
    */
   @Test
@@ -125,7 +122,7 @@ public class FractionImplTest {
 
   /**
    * Setting denominator to 0 or a negative value must throw IllegalArgumentException.
-   * Also checks that after a failed mutation attempt, the object remains valid
+   * after a failed attempt, the original object remains valid.
    */
   @Test
   public void testSetDenominatorRejectsNonPositive() {
@@ -134,7 +131,7 @@ public class FractionImplTest {
     assertThrows(IllegalArgumentException.class, () -> f.setDenominator(0));
     assertThrows(IllegalArgumentException.class, () -> f.setDenominator(-5));
 
-    // Invariant preserved: existing state will not be modified.
+    // Invariant preserved: existing value will not be modified.
     assertEquals("1 / 2", f.toString());
   }
 
@@ -149,7 +146,7 @@ public class FractionImplTest {
   }
 
   /**
-   * Negative/0 numerators will not trigger exception
+   * Negative or 0 numerators will not trigger exception
    */
   @Test
   public void testSetNumeratorDoesNotThrow() {
@@ -185,15 +182,15 @@ public class FractionImplTest {
     Fraction f = new FractionImpl(4, 2);
     assertEquals("2 / 1", f.toString());
 
-    // Another simplification: 6/15 -> 2/5
+    // 6/15 -> 2/5
     Fraction g = new FractionImpl(6, 15);
     assertEquals("2 / 5", g.toString());
   }
 
   /**
    * Verifies sign formatting rules for fractions.
-   * denominator stays positive and any negative sign is carried
-   * by the numerator.
+   * denominator stays positive, neg sign will be carried by
+   * the numerator.
    */
   @Test
   public void testToStringSignFormatting() {
@@ -203,7 +200,7 @@ public class FractionImplTest {
     assertEquals(-1, f.getNumerator());
     assertEquals(2, f.getDenominator());
 
-    // Zero should be consistently formatted (0/1)
+    // Zero should be formatted (0/1)
     Fraction z = new FractionImpl(0, 7);
     assertEquals("0 / 1", z.toString());
     assertEquals(0, z.getNumerator());
@@ -284,6 +281,7 @@ public class FractionImplTest {
     Fraction zero2 = new FractionImpl(0, 9);
     assertThrows(IllegalArgumentException.class, () -> zero2.reciprocal());
 
+    // nonZero will not trigger exception
     Fraction nonZero = new FractionImpl(-1, 2);
     assertDoesNotThrow(() -> nonZero.reciprocal());
     assertEquals("-2 / 1", nonZero.reciprocal().toString());
@@ -344,13 +342,13 @@ public class FractionImplTest {
     assertThrows(IllegalArgumentException.class, () -> a.add(null));
 
     Fraction b = new FractionImpl(1, 3);
-    assertDoesNotThrow(() -> a.add(b));
+    assertDoesNotThrow(() -> a.add(b)); // doesn't throw for regular adding
     assertEquals("5 / 6", a.add(b).toString());
   }
 
   // *********************** compareTo tests ***********************
   /**
-   * Fractions with equal numeric value should compare as equal (compareTo returns 0),
+   * Fractions with equal numeric value should return 0
    * even if constructed differently (e.g., 1/2 vs 2/4).
    */
   @Test
