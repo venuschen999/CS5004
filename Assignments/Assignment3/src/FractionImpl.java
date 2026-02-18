@@ -38,7 +38,7 @@ public class FractionImpl implements Fraction {
   /**
    * Returns the denominator of this fraction.
    *
-   * @return the denominator (always positive by class invariant)
+   * @return the denominator (always positive)
    */
   @Override
   public int getDenominator() {
