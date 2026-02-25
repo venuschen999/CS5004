@@ -26,15 +26,4 @@ public abstract class VisualArtist extends Artist {
         ", exhibits=" + Arrays.toString(exhibits) + "}");
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (!super.equals(o)) return false;
-    VisualArtist that = (VisualArtist) o;
-    return Arrays.equals(exhibits, that.exhibits);
-  }
-
-  @Override
-  public int hashCode() {
-    return 31 * super.hashCode() + Arrays.hashCode(exhibits);
-  }
 }
