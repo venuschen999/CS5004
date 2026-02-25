@@ -13,7 +13,7 @@ public abstract class VisualArtist extends Artist {
 
   public VisualArtist(Name name, int age, String[] genres, String[] awards, String[] exhibits) {
     super(name, age, genres, awards);
-    this.exhibits = safeCopy(exhibits);
+    this.exhibits = exhibits != null ? exhibits : new String[0];
   }
 
   public String[] getExhibits() {

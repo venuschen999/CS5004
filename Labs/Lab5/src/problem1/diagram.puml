@@ -1,0 +1,53 @@
+@startuml
+
+interface Awardable {
+    + receiveAward(award: String): void
+}
+
+abstract class Artist implements Awardable {
+    - name: Name
+    - birthYear: int
+    - age: int
+    - genres: String[]
+    - awards: String[]
+    + getAge(): int
+    + receiveAward(award: String): void
+    + setBirthYear(int): void
+}
+
+abstract class MultimediaArtist extends Artist {
+    - movies: String[]
+    - series: String[]
+    - otherMultimedia: String[]
+}
+
+abstract class VisualArtist extends Artist {
+    - exhibits: String[]
+}
+
+class Actor extends MultimediaArtist
+class Dancer extends MultimediaArtist
+class Filmmaker extends MultimediaArtist
+
+class Painter extends VisualArtist
+class Photographer extends VisualArtist
+
+class Musician extends Artist {
+    - recordingCompany: String
+    - lastRecordAlbum: String
+}
+
+class Poet extends Artist {
+    - publishingCompany: String
+    - lastPublishedCollection: String
+}
+
+class Name {
+    - firstName: String
+    - lastName: String
+    + getFullName(): String
+}
+
+Artist --> Name
+
+@enduml
